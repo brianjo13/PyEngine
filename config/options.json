@@ -1,3 +1,13 @@
 {
-    
+    "input_schema": {
+        "up":     "W",
+        "left":   "A",
+        "down":   "S",
+        "right":  "D"
+    },
+    "physics_layers": {
+        "physics_layer_1": 0,
+        "physics_layer_2": 1,
+        "physics_layer_3": 2
+    }
 }

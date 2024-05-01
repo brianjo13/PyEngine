@@ -1,36 +1,31 @@
 from __future__ import annotations
-
 import pygame
-
-from game_controller import GameController
+from pyengine import *
 
 
 class GameObject(object):
     
-    def __init__(self, width: float, height: float, x: float, y: float, physics_layer: str) -> None:
-        self.game_controller = GameController()
+    
+    def __init__(self, position : Vector, size : Vector, sprite, physics_layer: str = "physics_layer_1") -> None:
+        self.__game_controller = GameController()
         
-        self.width: float = width
-        self.height: float = height
-        self.x: float = x
-        self.y: float = y
+        self.position : Vector = position
+        self.size : Vector = size
         
-        self.rect: pygame.Rect = pygame.Rect(x, y, width, height)
-        
-        self.physics_layer: str = physics_layer
-        
+        self.sprite_surface : pygame.Surface = pygame.Surface((size.x, size.y))
+        self.sprite : pygame.Surface = sprite
+        self.face_right : bool = True
+
+        self.collision_rect: CollisionRect = CollisionRect(self, position, size, physics_layer)
         self.last_collisions: list[GameObject] = []
-        
-    def check_collision(self, possible_collisions: list[GameObject]) -> list[GameObject]:
-        new_collisions: list[GameObject] = []
-        
-        for possible_collision in possible_collisions:
-            if self.rect.colliderect(possible_collision.rect):
-                new_collisions.append(possible_collision)
-                self.collide(possible_collision)
-        
-        return new_collisions
+    
     
     def collide(self, collision_object: GameObject) -> None:
-        self.last_collisions.append(collision_object)
-        collision_object.last_collisions.append(self)
+        if collision_object not in self.last_collisions:
+            self.last_collisions.append(collision_object)
+        if self not in collision_object.last_collisions:
+            collision_object.last_collisions.append(self)
+    
+    
+    def draw(self, target) -> None:
+        target.blit()
