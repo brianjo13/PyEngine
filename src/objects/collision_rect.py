@@ -4,8 +4,8 @@ from pyengine import *
 class CollisionRect(pygame.Rect):
     
     
-    def __init__(self, parent : GameObject, position : Vector, size : Vector, offset : Vector = Vector(0, 0), physics_layer : str = "physics_layer_1") -> None:
-        super.__init__(position.x, position.y, size.x, size.y)
+    def __init__(self, parent : GameObject, size : Vector, offset : Vector = Vector(0, 0), physics_layer : str = "physics_layer_1") -> None:
+        super.__init__(parent.position.x + offset.x, parent.position.y + offset.y, size.x, size.y)
         self.__game_controller = GameController()
         
         self.parent = parent

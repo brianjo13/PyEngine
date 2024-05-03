@@ -6,7 +6,7 @@ from pyengine import *
 class GameObject(object):
     
     
-    def __init__(self, position : Vector, size : Vector, sprite, physics_layer: str = "physics_layer_1") -> None:
+    def __init__(self, position : Vector, size : Vector, sprite, physics_layer: str = "physics_layer_1", collision_rect : CollisionRect = None) -> None:
         self.__game_controller = GameController()
         
         self.position : Vector = position
@@ -16,7 +16,7 @@ class GameObject(object):
         self.sprite : pygame.Surface = sprite
         self.face_right : bool = True
 
-        self.collision_rect: CollisionRect = CollisionRect(self, position, size, physics_layer)
+        self.collision_rect: CollisionRect = collision_rect if collision_rect else CollisionRect(self, size, offset=Vector(0, 0), physics_layer=physics_layer)
         self.last_collisions: list[GameObject] = []
     
     
