@@ -6,8 +6,9 @@ from pyengine import *
 class GameObject(object):
     
     
-    def __init__(self, position : Vector, size : Vector, sprite, physics_layer: str = "physics_layer_1", collision_rect : CollisionRect = None) -> None:
-        self.__game_controller = GameController()
+    def __init__(self, position : Vector, size : Vector, sprite : pygame.Surface, physics_layer: str = "physics_layer_1", collision_rect : CollisionRect = None) -> None:
+        self._game_controller = GameController()
+        self._game_controller.add_physics_layer_content(physics_layer, self)
         
         self.position : Vector = position
         self.size : Vector = size
@@ -20,7 +21,7 @@ class GameObject(object):
         self.last_collisions: list[GameObject] = []
     
     
-    def collide(self, collision_object: GameObject) -> None:
+    def _collide(self, collision_object: GameObject) -> None:
         if collision_object not in self.last_collisions:
             self.last_collisions.append(collision_object)
         if self not in collision_object.last_collisions:
@@ -28,4 +29,6 @@ class GameObject(object):
     
     
     def draw(self, target) -> None:
-        target.blit()
+        target.blit(self.sprite_surface, self.position.tuple())
+        if self._game_controller.physics_debug:
+            self.collision_rect.draw(target)

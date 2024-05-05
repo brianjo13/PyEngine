@@ -1,5 +1,5 @@
 import pygame
-from ..pyengine import *
+from pyengine import *
 
 
 class Animator:
