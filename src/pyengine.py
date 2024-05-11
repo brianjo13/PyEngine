@@ -12,3 +12,4 @@ from objects.game_object import GameObject
 
 # root
 from body import Body
+from tile import Tile

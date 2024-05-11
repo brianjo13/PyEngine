@@ -28,7 +28,7 @@ class GameObject(object):
             collision_object.last_collisions.append(self)
     
     
-    def draw(self, target) -> None:
-        target.blit(self.sprite_surface, self.position.tuple())
+    def draw(self, target : pygame.Surface, scroll : Vector = Vector(0, 0)) -> None:
+        target.blit(self.sprite_surface, self.position.subtract_vector(scroll).tuple())
         if self._game_controller.physics_debug:
             self.collision_rect.draw(target)

@@ -18,13 +18,13 @@ class Player(Body):
         direction = Vector(0, 0)
         
         key = pygame.key.get_pressed()
-        if key[pygame.K_d]:
+        if key[pygame.key.key_code(self._game_controller.input_schema["right"])]:
             direction.x = 1
-        if key[pygame.K_a]:
+        if key[pygame.key.key_code(self._game_controller.input_schema["left"])]:
             direction.x = -1
-        if key[pygame.K_w]:
+        if key[pygame.key.key_code(self._game_controller.input_schema["up"])]:
             direction.y = -1
-        if key[pygame.K_s]:
+        if key[pygame.key.key_code(self._game_controller.input_schema["down"])]:
             direction.y = 1
         
         self.velocity = direction.normalize().scale(self.pace)   
@@ -44,13 +44,6 @@ class Player(Body):
             self.surf = self.animator.update(0, self.face_right)
         else:
             self.surf = self.animator.update(1, self.face_right)
-
-
-class Tile(GameObject):
-    
-    def __init__(self, position: Vector, size: Vector, sprite: pygame.Surface) -> None:
-        super().__init__(position, size, sprite)
-        self.sprite_surface.blit(sprite, position.tuple())
     
 
 # pygame setup
@@ -62,7 +55,7 @@ running = True
 
 game_controller = GameController()
 player = Player(Vector(100, 100), Vector(8, 16), pygame.image.load("data/sprites/player.png"))
-tile = Tile(Vector(150, 100), Vector(16, 16), pygame.image.load("data/sprites/tile.png"))
+tile = Tile(0, Vector(150, 100), Vector(16, 16), pygame.image.load("data/sprites/tile.png"))
 
 while running:
     # poll for events

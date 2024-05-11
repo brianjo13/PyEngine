@@ -15,9 +15,10 @@ class GameController(metaclass=Singleton):
         
         self.physics_layer_definitions: dict[str, int] = dict()
         self.physics_layer_contents: list[list[GameObject]] = []
-        self.physics_debug = True
         
         self.input_schema : dict[str, str] = dict()
+        
+        self.physics_debug : bool
         
         self.initialize()
         
@@ -54,3 +55,4 @@ class GameController(metaclass=Singleton):
             options : dict = json.load(json_file)
             self.input_schema = options["input_schema"]
             self.physics_layer_definitions = options["physics_layers"]
+            self.physics_debug = options["physics_debug"]

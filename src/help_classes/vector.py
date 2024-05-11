@@ -10,6 +10,10 @@ class Vector:
         self.y : float = y
     
     
+    def copy(self):
+        return Vector(self.x, self.y)
+    
+    
     def length(self) -> float:
         return (self.x**2 + self.y**2)**(1/2)
 
@@ -22,10 +26,16 @@ class Vector:
         return self.x == other.x and self.y == other.y
     
     
-    def scale(self, scalar):
-        self.x *= scalar
-        self.y *= scalar
-        return self
+    def add_vector(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+    
+    
+    def subtract_vector(self, other):
+        return Vector(self.x - other.x, self.y - other.y)
+    
+    
+    def scale(self, scalar : float):
+        return Vector(self.x * scalar, self.y * scalar)
 
     
     def normalize(self):

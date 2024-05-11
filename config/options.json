@@ -1,13 +1,14 @@
 {
     "input_schema": {
-        "up":     "W",
-        "left":   "A",
-        "down":   "S",
-        "right":  "D"
+        "up":     "w",
+        "left":   "a",
+        "down":   "s",
+        "right":  "d"
     },
     "physics_layers": {
         "physics_layer_1": 0,
         "physics_layer_2": 1,
         "physics_layer_3": 2
-    }
+    },
+    "physics_debug": false
 }
